@@ -1,39 +1,169 @@
-# Benchmark meshes
+# OpenFOAM Benchmark Meshes
 
-The archives are local benchmark inputs and are intentionally ignored by Git.
-Their exact sizes, SHA-256 digests, and topology statistics are recorded in
-[`manifest.json`](manifest.json).
+A collection of public OpenFOAM meshes prepared for solver benchmarking,
+performance analysis, and reproducible testing.
 
-| Mesh | Variant | Cells | Internal faces | Archive size (bytes) |
+The repository itself contains only metadata and documentation. The mesh
+archives are distributed through GitHub Releases.
+
+Current dataset release:
+
+- `dataset-v1`
+
+## Mesh dataset
+
+| Mesh | Variant | Cells | Internal faces | Archive size |
 |---|---|---:|---:|---:|
-| AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 |
-| AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 |
-| MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 |
-| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 |
-| MTB_example | original | 352,253 | 1,053,964 | 19,252,028 |
-| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 |
-| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 |
+| AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 B |
+| AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 B |
+| MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B |
+| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |
+| MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |
+| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B |
+| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B |
+
+Exact file sizes, SHA-256 checksums, and additional topology statistics are
+recorded in `mesh_catalog.json`.
+
+## Mesh provenance
+
+### MTB_example
+
+`MTB_example` is based on the standard OpenFOAM `motorBike` tutorial mesh.
+
+Upstream:
+
+- OpenFOAM `motorBike` tutorial
+- https://develop.openfoam.com/Development/openfoam/-/tree/master/tutorials/incompressibleFluid/motorBike
+
+The archive contains the generated OpenFOAM `polyMesh` used by the benchmark.
+
+No additional renumbered variant is currently included for this mesh due to small size.
+
+### MTBHPC_small
+
+`MTBHPC_small` is based on the OpenFOAM HPC Motorbike benchmark, size S.
+
+The HPC Motorbike benchmark was derived from the standard OpenFOAM motorBike
+tutorial. Its background mesh is refined by a factor of three in each
+direction while retaining the original `snappyHexMesh` setup. The published
+size-S case is approximately 8.6 million cells, matching the mesh distributed
+here. :contentReference[oaicite:1]{index=1}
+
+Upstream/reference:
+
+- OpenFOAM HPC Motorbike benchmark
+- https://develop.openfoam.com/committees/hpc/-/wikis/HPC-motorbike
+
+Published mesh size:
+
+- 8,613,999 cells
+- 25,952,973 internal faces
+
+Two variants are provided:
+
+- `MTBHPC_small.tgz` — original numbering
+- `MTBHPC_small_renumbered.tgz` — OpenFOAM-renumbered version
+
+### AHBody
+
+`AHBody` is an Ahmed-body OpenFOAM mesh used as a medium-sized benchmark case.
+
+Upstream source:
+
+- GitHub: https://github.com/nathanrooy/ahmed-bluff-body-cfd
+
+Published mesh size:
+
+- 2,845,652 cells
+- 8,592,613 internal faces
+
+Two variants are provided:
+
+- `AHBody_mesh.tgz` — original numbering
+- `AHBody_mesh_renumbered.tgz` — OpenFOAM-renumbered version
+
+### WD_DamBreak
+
+`WD_DamBreak` is a large dam-break OpenFOAM mesh used as a benchmark case.
+
+It is not the small standard OpenFOAM `damBreak` tutorial mesh. The standard
+tutorial uses a comparatively small block-structured mesh, whereas the mesh
+distributed here contains more than 9 million cells. :contentReference[oaicite:2]{index=2}
+
+Upstream source:
+
+- https://www.wolfdynamics.com/validations/3d_db/case0.tar.gz
+
+Published mesh size:
+
+- 9,376,387 cells
+- 27,975,312 internal faces
+
+Two variants are provided:
+
+- `WD_DamBreak_mesh.tgz` — original numbering
+- `WD_DamBreak_mesh_renumbered.tgz` — OpenFOAM-renumbered version
+
+## Preparation
+
+The benchmark archives contain OpenFOAM mesh data rather than complete
+simulation cases.
+
+Solver fields, time directories, logs, post-processing output, and other
+case-specific data are not included unless required to represent the mesh.
+
+The original mesh topology is preserved when creating the benchmark archives.
+
+### Renumbered variants
+
+Files with the `_renumbered` suffix were produced from the corresponding
+original mesh using OpenFOAM mesh renumbering.
+
+The intention is to provide both:
+
+- the upstream/original cell ordering;
+- an ordering optimized by the standard OpenFOAM renumbering procedure.
+
+Renumbering changes cell/face ordering but does not change the mesh topology.
+
+For every original/renumbered pair in `dataset-v1`, the following invariants
+were verified to be identical:
+
+- number of cells;
+- number of internal faces;
+- total number of faces;
+- number of points.
+
+No topology-count discrepancies were found.
 
 ## Metadata generation
 
-Each archive was unpacked into a temporary directory and read with the
-project's existing `PolyMeshReader`. The recorded topology fields are
-`cells`, `internal_faces`, total `faces`, and `points`. The reader does not
-currently expose the number of boundary patches, so that field is omitted
-instead of introducing a separate metadata parser.
+Each archive was unpacked into a temporary directory and read using the
+`PolyMeshReader` used by the benchmark infrastructure.
 
-Archive sizes were obtained from the local files and digests were computed
-with SHA-256. No archive content was modified.
+The catalog records:
 
-## Original/renumbered invariants
+- archive filename;
+- variant;
+- exact archive size;
+- SHA-256 digest;
+- number of cells;
+- number of internal faces;
+- total number of faces;
+- number of points.
 
-For every available original/renumbered pair (`AHBody`, `MTBHPC_small`, and
-`WD_DamBreak`), the following values are identical:
+The archive contents were not modified while collecting metadata.
 
-- cells;
-- internal faces;
-- total faces;
-- points.
+## Reproducibility
 
-No topology-count discrepancies were found. Archive byte sizes and SHA-256
-digests differ, as expected after renumbering.
+Published release assets should be treated as immutable benchmark inputs.
+
+If the contents of a mesh archive change, a new dataset release should be
+created rather than replacing an existing asset under the same release tag.
+
+For example:
+
+```text
+dataset-v1
+dataset-v2
