@@ -33,27 +33,25 @@ recorded in `mesh_catalog.json`.
 
 Upstream:
 
-- OpenFOAM `motorBike` tutorial
-- https://develop.openfoam.com/Development/openfoam/-/tree/master/tutorials/incompressibleFluid/motorBike
+- [OpenFOAM `motorBike` tutorial](https://develop.openfoam.com/Development/openfoam/-/tree/master/tutorials/incompressibleFluid/motorBike)
 
 The archive contains the generated OpenFOAM `polyMesh` used by the benchmark.
 
-No additional renumbered variant is currently included for this mesh due to small size.
+No renumbered variant is currently included for this mesh because of its
+relatively small size.
 
 ### MTBHPC_small
 
 `MTBHPC_small` is based on the OpenFOAM HPC Motorbike benchmark, size S.
 
-The HPC Motorbike benchmark was derived from the standard OpenFOAM motorBike
+The HPC Motorbike benchmark was derived from the standard OpenFOAM `motorBike`
 tutorial. Its background mesh is refined by a factor of three in each
-direction while retaining the original `snappyHexMesh` setup. The published
-size-S case is approximately 8.6 million cells, matching the mesh distributed
-here. :contentReference[oaicite:1]{index=1}
+direction while retaining the original `snappyHexMesh` setup. The size-S case
+contains approximately 8.6 million cells, matching the mesh distributed here.
 
 Upstream/reference:
 
-- OpenFOAM HPC Motorbike benchmark
-- https://develop.openfoam.com/committees/hpc/-/wikis/HPC-motorbike
+- [OpenFOAM HPC Motorbike benchmark](https://develop.openfoam.com/committees/hpc/-/wikis/HPC-motorbike)
 
 Published mesh size:
 
@@ -71,7 +69,7 @@ Two variants are provided:
 
 Upstream source:
 
-- GitHub: https://github.com/nathanrooy/ahmed-bluff-body-cfd
+- [Ahmed Bluff Body CFD](https://github.com/nathanrooy/ahmed-bluff-body-cfd)
 
 Published mesh size:
 
@@ -87,13 +85,13 @@ Two variants are provided:
 
 `WD_DamBreak` is a large dam-break OpenFOAM mesh used as a benchmark case.
 
-It is not the small standard OpenFOAM `damBreak` tutorial mesh. The standard
-tutorial uses a comparatively small block-structured mesh, whereas the mesh
-distributed here contains more than 9 million cells. :contentReference[oaicite:2]{index=2}
+It is not the small standard OpenFOAM `damBreak` tutorial mesh. The mesh
+distributed here contains more than 9 million cells and comes from the
+public Wolf Dynamics validation case.
 
 Upstream source:
 
-- https://www.wolfdynamics.com/validations/3d_db/case0.tar.gz
+- [Wolf Dynamics 3D dam-break case](https://www.wolfdynamics.com/validations/3d_db/case0.tar.gz)
 
 Published mesh size:
 
@@ -118,14 +116,17 @@ The original mesh topology is preserved when creating the benchmark archives.
 ### Renumbered variants
 
 Files with the `_renumbered` suffix were produced from the corresponding
-original mesh using OpenFOAM mesh renumbering.
+original mesh using the standard OpenFOAM command:
+
+    renumberMesh -overwrite
 
 The intention is to provide both:
 
-- the upstream/original cell ordering;
-- an ordering optimized by the standard OpenFOAM renumbering procedure.
+- the original mesh numbering;
+- the numbering produced by the standard OpenFOAM `renumberMesh` procedure.
 
-Renumbering changes cell/face ordering but does not change the mesh topology.
+Renumbering changes cell and face ordering but does not change the mesh
+topology.
 
 For every original/renumbered pair in `dataset-v1`, the following invariants
 were verified to be identical:
@@ -164,6 +165,19 @@ created rather than replacing an existing asset under the same release tag.
 
 For example:
 
-```text
-dataset-v1
-dataset-v2
+    dataset-v1
+    dataset-v2
+
+This allows benchmark results to refer to an exact dataset version together
+with the SHA-256 digest of each mesh archive.
+
+## Usage
+
+Mesh archives are available from the GitHub Releases section of this
+repository.
+
+Projects using this dataset should cache downloaded archives locally and verify
+their SHA-256 digests against `mesh_catalog.json`.
+
+The `WavefrontGaussSeidel` / `SmootherTest` benchmark infrastructure uses
+these meshes as external benchmark inputs and downloads them on demand.
