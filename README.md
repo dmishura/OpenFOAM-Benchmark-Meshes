@@ -1,14 +1,16 @@
 # OpenFOAM Benchmark Meshes
 
-A collection of public OpenFOAM meshes prepared for benchmarking, performance analysis, and reproducible testing.
+A collection of public OpenFOAM meshes prepared for solver benchmarking,
+performance analysis, and reproducible testing.
 
-Large mesh archives are distributed through GitHub Releases. The repository itself contains only documentation and metadata.
+The repository itself contains only metadata and documentation. The mesh
+archives are distributed through GitHub Releases.
 
 Current dataset release:
 
 - `dataset-v1`
 
-## Dataset
+## Mesh dataset
 
 | Mesh | Variant | Cells | Internal faces | Archive size |
 |---|---|---:|---:|---:|
@@ -20,123 +22,148 @@ Current dataset release:
 | WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B |
 | WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B |
 
-Exact file sizes, SHA-256 digests, and additional topology statistics are recorded in `manifest.json`.
+Exact file sizes, SHA-256 checksums, and additional topology statistics are
+recorded in `mesh_catalog.json`.
 
 ## Mesh provenance
 
 ### MTB_example
 
-Based on the standard OpenFOAM `motorBike` tutorial mesh.
+`MTB_example` is based on the standard OpenFOAM `motorBike` tutorial mesh.
 
-Source:
+Upstream:
+
 - OpenFOAM `motorBike` tutorial
+- https://develop.openfoam.com/Development/openfoam/-/tree/master/tutorials/incompressibleFluid/motorBike
 
-Preparation:
-- generated from the upstream tutorial case;
-- only the mesh data required by the benchmark was retained;
-- archived as `MTB_example_polyMesh.tgz`.
+The archive contains the generated OpenFOAM `polyMesh` used by the benchmark.
+
+No additional renumbered variant is currently included for this mesh due to small size.
 
 ### MTBHPC_small
 
-Based on the OpenFOAM HPC Motorbike benchmark, size S.
+`MTBHPC_small` is based on the OpenFOAM HPC Motorbike benchmark, size S.
 
-Source:
+The HPC Motorbike benchmark was derived from the standard OpenFOAM motorBike
+tutorial. Its background mesh is refined by a factor of three in each
+direction while retaining the original `snappyHexMesh` setup. The published
+size-S case is approximately 8.6 million cells, matching the mesh distributed
+here. :contentReference[oaicite:1]{index=1}
+
+Upstream/reference:
+
 - OpenFOAM HPC Motorbike benchmark
+- https://develop.openfoam.com/committees/hpc/-/wikis/HPC-motorbike
 
 Published mesh size:
+
 - 8,613,999 cells
 - 25,952,973 internal faces
 
-Variants:
-- `MTBHPC_small.tgz` — original numbering;
-- `MTBHPC_small_renumbered.tgz` — mesh after OpenFOAM renumbering.
+Two variants are provided:
+
+- `MTBHPC_small.tgz` — original numbering
+- `MTBHPC_small_renumbered.tgz` — OpenFOAM-renumbered version
 
 ### AHBody
 
-Ahmed-body OpenFOAM mesh used as a medium-sized benchmark workload.
+`AHBody` is an Ahmed-body OpenFOAM mesh used as a medium-sized benchmark case.
 
-Source:
-- TODO: add exact upstream URL/project
+Upstream source:
+
+- GitHub: https://github.com/nathanrooy/ahmed-bluff-body-cfd
 
 Published mesh size:
+
 - 2,845,652 cells
 - 8,592,613 internal faces
 
-Variants:
-- `AHBody_mesh.tgz` — original numbering;
-- `AHBody_mesh_renumbered.tgz` — mesh after OpenFOAM renumbering.
+Two variants are provided:
+
+- `AHBody_mesh.tgz` — original numbering
+- `AHBody_mesh_renumbered.tgz` — OpenFOAM-renumbered version
 
 ### WD_DamBreak
 
-Large dam-break OpenFOAM mesh used as a benchmark workload.
+`WD_DamBreak` is a large dam-break OpenFOAM mesh used as a benchmark case.
 
-Source:
-- TODO: add exact upstream URL/project
+It is not the small standard OpenFOAM `damBreak` tutorial mesh. The standard
+tutorial uses a comparatively small block-structured mesh, whereas the mesh
+distributed here contains more than 9 million cells. :contentReference[oaicite:2]{index=2}
+
+Upstream source:
+
+- https://www.wolfdynamics.com/validations/3d_db/case0.tar.gz
 
 Published mesh size:
+
 - 9,376,387 cells
 - 27,975,312 internal faces
 
-Variants:
-- `WD_DamBreak_mesh.tgz` — original numbering;
-- `WD_DamBreak_mesh_renumbered.tgz` — mesh after OpenFOAM renumbering.
+Two variants are provided:
+
+- `WD_DamBreak_mesh.tgz` — original numbering
+- `WD_DamBreak_mesh_renumbered.tgz` — OpenFOAM-renumbered version
 
 ## Preparation
 
-The archives contain OpenFOAM mesh data rather than complete simulation cases.
+The benchmark archives contain OpenFOAM mesh data rather than complete
+simulation cases.
 
-Solver fields, time directories, logs, post-processing output, and other case-specific data are not included unless required to represent the mesh.
+Solver fields, time directories, logs, post-processing output, and other
+case-specific data are not included unless required to represent the mesh.
+
+The original mesh topology is preserved when creating the benchmark archives.
 
 ### Renumbered variants
 
-Files with the `_renumbered` suffix were produced from the corresponding original mesh using OpenFOAM mesh renumbering.
+Files with the `_renumbered` suffix were produced from the corresponding
+original mesh using OpenFOAM mesh renumbering.
 
-The goal is to provide both:
+The intention is to provide both:
 
-- the original/upstream numbering;
-- the numbering produced by the standard OpenFOAM renumbering workflow.
+- the upstream/original cell ordering;
+- an ordering optimized by the standard OpenFOAM renumbering procedure.
 
-Renumbering changes cell and face ordering but preserves mesh topology.
+Renumbering changes cell/face ordering but does not change the mesh topology.
 
-For every original/renumbered pair in `dataset-v1`, the following invariants were verified:
+For every original/renumbered pair in `dataset-v1`, the following invariants
+were verified to be identical:
 
-- cells;
-- internal faces;
-- total faces;
-- points.
+- number of cells;
+- number of internal faces;
+- total number of faces;
+- number of points.
 
 No topology-count discrepancies were found.
 
 ## Metadata generation
 
-Each archive was unpacked into a temporary directory and read with the benchmark project's existing `PolyMeshReader`.
+Each archive was unpacked into a temporary directory and read using the
+`PolyMeshReader` used by the benchmark infrastructure.
 
-The recorded topology fields are:
+The catalog records:
 
-- cells;
-- internal faces;
-- total faces;
-- points.
+- archive filename;
+- variant;
+- exact archive size;
+- SHA-256 digest;
+- number of cells;
+- number of internal faces;
+- total number of faces;
+- number of points.
 
-Archive sizes were obtained from the local files and digests were computed with SHA-256.
-
-No archive contents were modified while collecting metadata.
+The archive contents were not modified while collecting metadata.
 
 ## Reproducibility
 
 Published release assets should be treated as immutable benchmark inputs.
 
-If the contents of a mesh archive change, publish a new dataset release rather than replacing an existing asset under the same release tag.
+If the contents of a mesh archive change, a new dataset release should be
+created rather than replacing an existing asset under the same release tag.
 
 For example:
 
-- `dataset-v1`
-- `dataset-v2`
-
-This allows benchmark results to refer to an exact dataset version together with the SHA-256 digest of each archive.
-
-## Usage
-
-Mesh archives are available from the GitHub Releases section of this repository.
-
-Projects using this dataset should cache downloaded archives locally and verify their SHA-256 digests against the repository metadata.
+```text
+dataset-v1
+dataset-v2
