@@ -40,19 +40,27 @@ size (assuming 8-byte scalar values). These are index-based locality proxies,
 not measured hardware cache-hit rates or a prediction of physical `psi`
 locality after a permutation. Roughness uses the benchmark analysis definition.
 
-| Mesh | Numbering | Cells | Internal faces | Mean Δ/N | P99 Δ/N | same64B | same4KiB | same2MiB | Roughness |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| MTB_example (motorBike) | original | 352,253 | 1,053,964 | 0.08676 | 0.80476 | 21.80% | 53.16% | 92.33% | 0.31165 |
-| AHBody | original | 2,845,652 | 8,592,613 | 0.03785 | 0.34483 | 21.18% | 62.73% | 79.50% | 0.14539 |
-| AHBody | renumbered | 2,845,652 | 8,592,613 | 0.00528 | 0.01602 | 26.14% | 52.95% | 94.80% | 0.02505 |
-| MTBHPC_small | original | 8,613,999 | 25,952,973 | 0.04199 | 0.39640 | 21.13% | 49.45% | 65.58% | 0.15657 |
-| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 0.00497 | 0.01407 | 20.87% | 40.21% | 85.28% | 0.01777 |
-| WD_DamBreak | original | 9,376,387 | 27,975,312 | 0.00168 | 0.00363 | 29.20% | 51.71% | 95.75% | 0.00947 |
-| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 0.00171 | 0.00214 | 0.00% | 0.09% | 94.32% | 0.00388 |
-| Cavity3d | original | 8,000,000 | 23,880,000 | 0.00183 | 0.00286 | 29.16% | 53.81% | 97.24% | 0.00975 |
-| Cavity3d | renumbered | 8,000,000 | 23,880,000 | 0.00234 | 0.00233 | 0.00% | 0.10% | 94.79% | 0.00668 |
-| ConicalDiffuser | original | 3,095,547 | 9,256,046 | 0.00235 | 0.07308 | 28.32% | 63.97% | 98.38% | 0.01390 |
-| ConicalDiffuser | renumbered | 3,095,547 | 9,256,046 | 0.00262 | 0.00256 | 0.00% | 0.24% | 97.44% | 0.00697 |
+| Mesh | Cells / Faces, M | Mean Δ/N | P99 Δ/N | Locality 64B / 4K / 2M, % | R |
+|---|---:|---:|---:|---:|---:|
+| motorBike | 0.35 / 1.05 | 0.08676 | 0.80476 | 21.8 / 53.2 / 92.3 | 0.3117 |
+| AHBody | 2.85 / 8.59 | 0.03785 | 0.34483 | 21.2 / 62.7 / 79.5 | 0.1454 |
+| AHBody RN | 2.85 / 8.59 | 0.00528 | 0.01602 | 26.1 / 53.0 / 94.8 | 0.0251 |
+| MTBHPC | 8.61 / 25.95 | 0.04199 | 0.39640 | 21.1 / 49.5 / 65.6 | 0.1566 |
+| MTBHPC RN | 8.61 / 25.95 | 0.00497 | 0.01407 | 20.9 / 40.2 / 85.3 | 0.0178 |
+| WD_DamBreak | 9.38 / 27.98 | 0.00168 | 0.00363 | 29.2 / 51.7 / 95.8 | 0.0095 |
+| WD_DamBreak RN | 9.38 / 27.98 | 0.00171 | 0.00214 | 0.0 / 0.1 / 94.3 | 0.0039 |
+| Cavity3d | 8.00 / 23.88 | 0.00183 | 0.00286 | 29.2 / 53.8 / 97.2 | 0.0098 |
+| Cavity3d RN | 8.00 / 23.88 | 0.00234 | 0.00233 | 0.0 / 0.1 / 94.8 | 0.0067 |
+| ConicalDiffuser | 3.10 / 9.26 | 0.00235 | 0.07308 | 28.3 / 64.0 / 98.4 | 0.0139 |
+| ConicalDiffuser RN | 3.10 / 9.26 | 0.00262 | 0.00256 | 0.0 / 0.2 / 97.4 | 0.0070 |
+
+**Notes:**
+- **RN** = renumbered mesh.
+- **M** = million cells / internal faces.
+- **R** = mesh roughness.
+- **Locality** = percentage of consecutive adjacency-endpoint accesses
+  falling within the same 64-byte, 4-KiB, or 2-MiB index range.
+  These are locality proxies, not measured cache hit rates.
 
 Renumbering generally reduces roughness and long index-distance tails, but
 does not improve every locality proxy: for some renumbered meshes, same64B and
