@@ -8,7 +8,7 @@ archives are distributed through GitHub Releases.
 
 Current dataset release:
 
-- `dataset-v1`
+- `dataset-v2`
 
 ## Mesh dataset
 
