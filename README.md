@@ -16,6 +16,10 @@ Current dataset release:
 |---|---|---:|---:|---:|---|
 | AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 B | Pending confirmation |
 | AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 B | Pending confirmation |
+| Cavity3d | original | 8,000,000 | 23,880,000 | 250,991,557 B | CC BY-SA 4.0 |
+| Cavity3d | renumbered | 8,000,000 | 23,880,000 | 258,063,940 B | CC BY-SA 4.0 |
+| ConicalDiffuser | original | 3,095,547 | 9,256,046 | 115,118,455 B | CC BY-SA 4.0 |
+| ConicalDiffuser | renumbered | 3,095,547 | 9,256,046 | 117,496,077 B | CC BY-SA 4.0 |
 | MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B | GPL-3.0-or-later |
 | MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |GPL-3.0-or-later |
 | MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |GPL-3.0-or-later |
@@ -81,6 +85,38 @@ Two variants are provided:
 - `AHBody_mesh.tgz` — original numbering
 - `AHBody_mesh_renumbered.tgz` — OpenFOAM-renumbered version
 
+### Cavity3d
+
+Cavity3d is sourced from the exaFOAM benchmark collection, listed there as
+“MB1 – Cavity 3D” (solver: `icoFoam`, incompressible laminar flow).
+
+Source:
+
+- [exaFOAM Benchmarks](https://exafoam.eu/benchmarks/)
+
+Two mesh archives are included:
+
+- `Cavity3d_mesh.tgz` — original numbering
+- `Cavity3d_mesh_renumbered.tgz` — renumbered version
+
+The source mesh is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+### ConicalDiffuser
+
+ConicalDiffuser is sourced from the exaFOAM benchmark collection, which lists
+ERCOFTAC conical-diffuser benchmarks.
+
+Source:
+
+- [exaFOAM Benchmarks](https://exafoam.eu/benchmarks/)
+
+Two mesh archives are included:
+
+- `ConicalDiffuser_mesh.tgz` — original numbering
+- `ConicalDiffuser_mesh_renumbered.tgz` — renumbered version
+
+The source mesh is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
 ### WD_DamBreak
 
 `WD_DamBreak` is a large dam-break OpenFOAM mesh used as a benchmark case.
@@ -128,7 +164,7 @@ The intention is to provide both:
 Renumbering changes cell and face ordering but does not change the mesh
 topology.
 
-For every original/renumbered pair in `dataset-v1`, the following invariants
+For every original/renumbered pair currently cataloged, the following invariants
 were verified to be identical:
 
 - number of cells;

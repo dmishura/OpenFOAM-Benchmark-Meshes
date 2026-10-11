@@ -28,6 +28,58 @@
       }
     },
     {
+      "mesh": "Cavity3d",
+      "variant": "original",
+      "filename": "Cavity3d_mesh.tgz",
+      "size_bytes": 250991557,
+      "sha256": "1d802ab2451c7af318e929f3b16653eb1d3fc302e6fec76a734ec030da2e1ba2",
+      "statistics": {
+        "cells": 8000000,
+        "internal_faces": 23880000,
+        "faces": 24120000,
+        "points": 8120601
+      }
+    },
+    {
+      "mesh": "Cavity3d",
+      "variant": "renumbered",
+      "filename": "Cavity3d_mesh_renumbered.tgz",
+      "size_bytes": 258063940,
+      "sha256": "18fa8f4c0bbfd10398d92f92fa986b16760b61f2286483eafcdb05f88b77bc01",
+      "statistics": {
+        "cells": 8000000,
+        "internal_faces": 23880000,
+        "faces": 24120000,
+        "points": 8120601
+      }
+    },
+    {
+      "mesh": "ConicalDiffuser",
+      "variant": "original",
+      "filename": "ConicalDiffuser_mesh.tgz",
+      "size_bytes": 115118455,
+      "sha256": "62d2d4a00debd8bd0054bcbfd09a9919a9ada18b24538b30a46b0f0c92c23ee4",
+      "statistics": {
+        "cells": 3095547,
+        "internal_faces": 9256046,
+        "faces": 9317236,
+        "points": 3126592
+      }
+    },
+    {
+      "mesh": "ConicalDiffuser",
+      "variant": "renumbered",
+      "filename": "ConicalDiffuser_mesh_renumbered.tgz",
+      "size_bytes": 117496077,
+      "sha256": "d28e86c7dca28aac8461fd3bd5486f3b1e39cc1e197d07840acf8d45f1f9163c",
+      "statistics": {
+        "cells": 3095547,
+        "internal_faces": 9256046,
+        "faces": 9317236,
+        "points": 3126592
+      }
+    },
+    {
       "mesh": "MTBHPC_small",
       "variant": "original",
       "filename": "MTBHPC_small.tgz",
@@ -96,6 +148,16 @@
   "pair_checks": [
     {
       "mesh": "AHBody",
+      "compared_fields": ["cells", "internal_faces", "faces", "points"],
+      "match": true
+    },
+    {
+      "mesh": "Cavity3d",
+      "compared_fields": ["cells", "internal_faces", "faces", "points"],
+      "match": true
+    },
+    {
+      "mesh": "ConicalDiffuser",
       "compared_fields": ["cells", "internal_faces", "faces", "points"],
       "match": true
     },
