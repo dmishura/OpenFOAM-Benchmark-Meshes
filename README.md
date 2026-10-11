@@ -12,15 +12,15 @@ Current dataset release:
 
 ## Mesh dataset
 
-| Mesh | Variant | Cells | Internal faces | Archive size |
-|---|---|---:|---:|---:|
-| AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 B |
-| AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 B |
-| MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B |
-| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |
-| MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |
-| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B |
-| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B |
+| Mesh | Variant | Cells | Internal faces | Archive size | License
+|---|---|---:|---:|---:|---|
+| AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 B | Pending confirmation |
+| AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 B | Pending confirmation |
+| MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B | GPL-3.0-or-later |
+| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |GPL-3.0-or-later |
+| MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |GPL-3.0-or-later |
+| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B | Pending confirmation |
+| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B | Pending confirmation |
 
 Exact file sizes, SHA-256 checksums, and additional topology statistics are
 recorded in `mesh_catalog.json`.
@@ -181,3 +181,11 @@ their SHA-256 digests against `mesh_catalog.json`.
 
 The `WavefrontGaussSeidel` / `SmootherTest` benchmark infrastructure uses
 these meshes as external benchmark inputs and downloads them on demand.
+
+## License
+
+The mesh datasets are subject to their respective upstream licenses, as indicated in the mesh table above.
+
+Original scripts, tools, metadata, and documentation created specifically for this repository are licensed under the [MIT License](LICENSE).
+
+This license does not apply to third-party mesh datasets or other upstream materials.
