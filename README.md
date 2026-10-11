@@ -12,19 +12,24 @@ Current dataset release:
 
 ## Mesh dataset
 
-| Mesh | Variant | Cells | Internal faces | Archive size | License
-|---|---|---:|---:|---:|---|
-| AHBody | original | 2,845,652 | 8,592,613 | 111,531,462 B | Pending confirmation |
-| AHBody | renumbered | 2,845,652 | 8,592,613 | 112,158,065 B | Pending confirmation |
-| Cavity3d | original | 8,000,000 | 23,880,000 | 250,991,557 B | CC BY-SA 4.0 |
-| Cavity3d | renumbered | 8,000,000 | 23,880,000 | 258,063,940 B | CC BY-SA 4.0 |
-| ConicalDiffuser | original | 3,095,547 | 9,256,046 | 115,118,455 B | CC BY-SA 4.0 |
-| ConicalDiffuser | renumbered | 3,095,547 | 9,256,046 | 117,496,077 B | CC BY-SA 4.0 |
-| MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B | GPL-3.0-or-later |
-| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |GPL-3.0-or-later |
-| MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |GPL-3.0-or-later |
-| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B | Redistribution permitted by author |
-| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B | Redistribution permitted by author |
+| Mesh | Cells / Faces, M | Archive, MB | License |
+|---|---:|---:|---|
+| motorBike | 0.35 / 1.05 | 19.25 | GPL-3.0-or-later |
+| AHBody | 2.85 / 8.59 | 111.53 | Pending confirmation |
+| AHBody RN | 2.85 / 8.59 | 112.16 | Pending confirmation |
+| ConicalDiffuser | 3.10 / 9.26 | 115.12 | CC BY-SA 4.0 |
+| ConicalDiffuser RN | 3.10 / 9.26 | 117.50 | CC BY-SA 4.0 |
+| Cavity3d | 8.00 / 23.88 | 250.99 | CC BY-SA 4.0 |
+| Cavity3d RN | 8.00 / 23.88 | 258.06 | CC BY-SA 4.0 |
+| MTBHPC | 8.61 / 25.95 | 465.92 | GPL-3.0-or-later |
+| MTBHPC RN | 8.61 / 25.95 | 472.16 | GPL-3.0-or-later |
+| WD_DamBreak | 9.38 / 27.98 | 330.31 | Redistribution permitted by author |
+| WD_DamBreak RN | 9.38 / 27.98 | 336.87 | Redistribution permitted by author |
+
+**Notes:**
+- **RN** = renumbered mesh.
+- **M** = million cells / internal faces.
+- **MB** = decimal megabytes (10⁶ bytes).
 
 Exact file sizes, SHA-256 checksums, and additional topology statistics are
 recorded in `mesh_catalog.json`.
