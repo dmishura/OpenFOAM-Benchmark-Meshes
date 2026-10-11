@@ -23,8 +23,8 @@ Current dataset release:
 | MTBHPC_small | original | 8,613,999 | 25,952,973 | 465,922,322 B | GPL-3.0-or-later |
 | MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 472,156,064 B |GPL-3.0-or-later |
 | MTB_example | original | 352,253 | 1,053,964 | 19,252,028 B |GPL-3.0-or-later |
-| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B | Pending confirmation |
-| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B | Pending confirmation |
+| WD_DamBreak | original | 9,376,387 | 27,975,312 | 330,305,556 B | Redistribution permitted by author |
+| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 336,870,809 B | Redistribution permitted by author |
 
 Exact file sizes, SHA-256 checksums, and additional topology statistics are
 recorded in `mesh_catalog.json`.
@@ -138,6 +138,12 @@ Two variants are provided:
 
 - `WD_DamBreak_mesh.tgz` — original numbering
 - `WD_DamBreak_mesh_renumbered.tgz` — OpenFOAM-renumbered version
+
+**Redistribution permission:** Granted by Joel Guerrero
+(Wolf Dynamics) via email on 2026-10-11.
+
+Permission covers the publication of both original and
+renumbered polyMesh archives in this benchmark repository.
 
 ## Preparation
 
