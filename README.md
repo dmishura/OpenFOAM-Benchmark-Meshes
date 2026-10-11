@@ -29,6 +29,37 @@ Current dataset release:
 Exact file sizes, SHA-256 checksums, and additional topology statistics are
 recorded in `mesh_catalog.json`.
 
+## Mesh ordering locality summary
+
+The table summarizes adjacency locality in each mesh's original/natural cell
+numbering, before IH1 permutation. `Mean Δ/N` and `P99 Δ/N` are the mean and
+99th-percentile absolute index distance between adjacent cells, normalized by
+the number of cells. `same64B/4KiB/2MiB` is the fraction of adjacent endpoint
+pairs whose cell indices fall in the same index span corresponding to that
+size (assuming 8-byte scalar values). These are index-based locality proxies,
+not measured hardware cache-hit rates or a prediction of physical `psi`
+locality after a permutation. Roughness uses the benchmark analysis definition.
+
+| Mesh | Numbering | Cells | Internal faces | Mean Δ/N | P99 Δ/N | same64B | same4KiB | same2MiB | Roughness |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| MTB_example (motorBike) | original | 352,253 | 1,053,964 | 0.08676 | 0.80476 | 21.80% | 53.16% | 92.33% | 0.31165 |
+| AHBody | original | 2,845,652 | 8,592,613 | 0.03785 | 0.34483 | 21.18% | 62.73% | 79.50% | 0.14539 |
+| AHBody | renumbered | 2,845,652 | 8,592,613 | 0.00528 | 0.01602 | 26.14% | 52.95% | 94.80% | 0.02505 |
+| MTBHPC_small | original | 8,613,999 | 25,952,973 | 0.04199 | 0.39640 | 21.13% | 49.45% | 65.58% | 0.15657 |
+| MTBHPC_small | renumbered | 8,613,999 | 25,952,973 | 0.00497 | 0.01407 | 20.87% | 40.21% | 85.28% | 0.01777 |
+| WD_DamBreak | original | 9,376,387 | 27,975,312 | 0.00168 | 0.00363 | 29.20% | 51.71% | 95.75% | 0.00947 |
+| WD_DamBreak | renumbered | 9,376,387 | 27,975,312 | 0.00171 | 0.00214 | 0.00% | 0.09% | 94.32% | 0.00388 |
+| Cavity3d | original | 8,000,000 | 23,880,000 | 0.00183 | 0.00286 | 29.16% | 53.81% | 97.24% | 0.00975 |
+| Cavity3d | renumbered | 8,000,000 | 23,880,000 | 0.00234 | 0.00233 | 0.00% | 0.10% | 94.79% | 0.00668 |
+| ConicalDiffuser | original | 3,095,547 | 9,256,046 | 0.00235 | 0.07308 | 28.32% | 63.97% | 98.38% | 0.01390 |
+| ConicalDiffuser | renumbered | 3,095,547 | 9,256,046 | 0.00262 | 0.00256 | 0.00% | 0.24% | 97.44% | 0.00697 |
+
+Renumbering generally reduces roughness and long index-distance tails, but
+does not improve every locality proxy: for some renumbered meshes, same64B and
+same4KiB fractions are much lower. The metrics should therefore be interpreted
+together, not as a single locality score. Full methodology and per-ordering
+results are maintained in the WavefrontGaussSeidel mesh-ordering analysis.
+
 ## Mesh provenance
 
 ### MTB_example
