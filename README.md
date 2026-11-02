@@ -15,8 +15,8 @@ Current dataset release:
 | Mesh | Cells / Faces, M | Archive, MB | License |
 |---|---:|---:|---|
 | motorBike | 0.35 / 1.05 | 19.25 | GPL-3.0-or-later |
-| AHBody | 2.85 / 8.59 | 111.53 | Pending confirmation |
-| AHBody RN | 2.85 / 8.59 | 112.16 | Pending confirmation |
+| AHBody | 2.85 / 8.59 | 111.53 | Redistribution permitted by author |
+| AHBody RN | 2.85 / 8.59 | 112.16 | Redistribution permitted by author |
 | ConicalDiffuser | 3.10 / 9.26 | 115.12 | CC BY-SA 4.0 |
 | ConicalDiffuser RN | 3.10 / 9.26 | 117.50 | CC BY-SA 4.0 |
 | Cavity3d | 8.00 / 23.88 | 250.99 | CC BY-SA 4.0 |
@@ -120,6 +120,12 @@ Two variants are provided:
 
 - `AHBody_mesh.tgz` — original numbering
 - `AHBody_mesh_renumbered.tgz` — OpenFOAM-renumbered version
+
+**Redistribution permission:** Granted by Nathan Rooy
+via [GitHub issue #2](https://github.com/nathanrooy/ahmed-bluff-body-cfd/issues/2#issuecomment-6560771854).
+
+Permission covers publication of both original and
+renumbered polyMesh archives in this benchmark repository.
 
 ### Cavity3d
 
